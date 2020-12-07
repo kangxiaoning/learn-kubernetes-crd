@@ -1,0 +1,11 @@
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  name: machine.crd.alpha.io
+spec:
+  group: crd.alpha.io
+  version: v1
+  names:
+    kind: Machine
+    plural: machines
+  scope: Namespaced

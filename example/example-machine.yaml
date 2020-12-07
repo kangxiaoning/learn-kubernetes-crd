@@ -1,0 +1,8 @@
+apiVersion: crd.alpha.io/v1
+kind: Machine
+metadata:
+  name: example-alpha
+spec:
+  cpu: 2
+  memory: 4
+  storage: 10
