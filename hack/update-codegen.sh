@@ -26,5 +26,7 @@ ROOT_PACKAGE="github.com/kangxiaoning/learn-kubernetes-crd"
 CUSTOM_RESOURCE_NAME="crd"
 CUSTOM_RESOURCE_VERSION="v1"
 
+chmod +x ../vendor/k8s.io/code-generator/generate-groups.sh
+
 ../vendor/k8s.io/code-generator/generate-groups.sh all "$ROOT_PACKAGE/pkg/client" "$ROOT_PACKAGE/pkg/apis" "$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION" \
-  --go-header-file $(pwd)/boilerplate.go.txt \
+  --go-header-file $(pwd)/boilerplate.go.txt
