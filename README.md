@@ -3,13 +3,31 @@
 该 CRD 的定义如下。
 
 ```bash
-apiVersion: apiextensions.k8s.io/v1beta1
+apiVersion: apiextensions.k8s.io/v1
 kind: CustomResourceDefinition
 metadata:
-  name: machine.crd.alpha.io
+  name: machines.crd.alpha.io
 spec:
   group: crd.alpha.io
-  version: v1
+  versions:
+    - name: v1
+      # Each version can be enabled/disabled by Served flag.
+      served: true
+      # One and only one version must be marked as the storage version.
+      storage: true
+      schema:
+        openAPIV3Schema:
+          type: object
+          properties:
+            spec:
+              type: object
+              properties:
+                cpu:
+                  type: integer
+                memory:
+                  type: integer
+                storage:
+                  type: integer
   names:
     kind: Machine
     plural: machines
@@ -272,6 +290,8 @@ ROOT_PACKAGE="github.com/kangxiaoning/learn-kubernetes-crd"
 CUSTOM_RESOURCE_NAME="crd"
 CUSTOM_RESOURCE_VERSION="v1"
 
+chmod +x ../vendor/k8s.io/code-generator/generate-groups.sh
+
 ../vendor/k8s.io/code-generator/generate-groups.sh all "$ROOT_PACKAGE/pkg/client" "$ROOT_PACKAGE/pkg/apis" "$CUSTOM_RESOURCE_NAME:$CUSTOM_RESOURCE_VERSION" \
   --go-header-file $(pwd)/boilerplate.go.txt \
 
@@ -284,7 +304,6 @@ CUSTOM_RESOURCE_VERSION="v1"
 ```
 cd $GOPATH/src/github.com/kangxiaoning/learn-kubernetes-crd
 go mod vendor
-chmod +x vendor/k8s.io/code-generator/generate-groups.sh
 chmod +x hack/update-codegen.sh
 cd hack && ./update-codegen.sh
 
