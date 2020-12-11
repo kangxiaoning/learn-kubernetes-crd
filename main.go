@@ -17,7 +17,6 @@ import (
 	"flag"
 	"time"
 
-	// kubeinformers "k8s.io/client-go/informers"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 	"k8s.io/klog/v2"
@@ -57,11 +56,9 @@ func main() {
 		klog.Fatalf("Error building machine clientset: %s", err.Error())
 	}
 
-	// kubeInformerFactory := kubeinformers.NewSharedInformerFactory(kubeClient, time.Second*30)
 	machineInformerFactory := informers.NewSharedInformerFactory(machineClient, time.Second*30)
 
 	controller := NewController(kubeClient, machineClient,
-		// kubeInformerFactory.Apps().V1().Deployments(),
 		machineInformerFactory.Crd().V1().Machines())
 
 	// notice that there is no need to run Start methods in a separate goroutine. (i.e. go kubeInformerFactory.Start(stopCh)

@@ -241,7 +241,7 @@ func (c *Controller) syncHandler(key string) error {
 
 			// FIX ME: call Alpha API to delete this machine by name.
 			//
-			// neutron.Delete(namespace, name)
+			// alphaops.Delete(namespace, name)
 
 			return nil
 		}
@@ -255,12 +255,12 @@ func (c *Controller) syncHandler(key string) error {
 
 	// FIX ME: Do diff().
 	//
-	// actualNetwork, exists := neutron.Get(namespace, name)
+	// actualMachine, exists := alphaops.Get(namespace, name)
 	//
 	// if !exists {
-	// 	neutron.Create(namespace, name)
-	// } else if !reflect.DeepEqual(actualNetwork, machine) {
-	// 	neutron.Update(namespace, name)
+	// 	alphaops.Create(namespace, name)
+	// } else if !reflect.DeepEqual(actualMachine, machine) {
+	// 	alphaops.Update(namespace, name)
 	// }
 
 	c.recorder.Event(machine, corev1.EventTypeNormal, SuccessSynced, MessageResourceSynced)
