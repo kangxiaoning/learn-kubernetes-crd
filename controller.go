@@ -37,7 +37,7 @@ import (
 	listers "github.com/kangxiaoning/learn-kubernetes-crd/pkg/client/listers/crd/v1"
 )
 
-const controllerAgentName = "sample-controller"
+const controllerAgentName = "machine-controller"
 
 const (
 	// SuccessSynced is used as part of the Event 'reason' when a Machine is synced
@@ -75,15 +75,15 @@ type Controller struct {
 	recorder record.EventRecorder
 }
 
-// NewController returns a new sample controller
+// NewController returns a new machine controller
 func NewController(
 	kubeclientset kubernetes.Interface,
 	machineclientset clientset.Interface,
 	machineInformer informers.MachineInformer) *Controller {
 
 	// Create event broadcaster
-	// Add sample-controller types to the default Kubernetes Scheme so Events can be
-	// logged for sample-controller types.
+	// Add machine-controller types to the default Kubernetes Scheme so Events can be
+	// logged for machine-controller types.
 	utilruntime.Must(machinescheme.AddToScheme(scheme.Scheme))
 	klog.V(4).Info("Creating event broadcaster")
 	eventBroadcaster := record.NewBroadcaster()
